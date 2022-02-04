@@ -111,9 +111,9 @@ run();
 
 ![Component Diagram](https://raw.githubusercontent.com/airicyu/rameter/main/images/Rameter%20Components.png)
 
-## Web dashboard screencamp
+## Realtime Dashboard
 
-![Web dashboard screencamp](https://raw.githubusercontent.com/airicyu/rameter/main/images/web%20dashboard%20screencap.png)
+![Realtime dashboard](https://raw.githubusercontent.com/airicyu/rameter/main/images/web%20dashboard%20screencap.png)
 
 ----
 
