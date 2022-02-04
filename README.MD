@@ -103,28 +103,10 @@ const run = async () => {
 };
 run();
 ```
-
 ----
 
-HTTP Sampler
+## Component Diagram
 
-// ...UserModelConfig.stepUserLoopN({
-        //   maxUsers: 100,
-        //   steps: 10,
-        //   rampUpTime: 10,
-        //   runNTimes: 10,
-        // }),
-        // ...UserModelConfig.stepUserForTime({
-        //   maxUsers: 1000,
-        //   steps: 10,
-        //   rampUpTime: 60,
-        //   holdTime: 60,
-        // }),
-        // ...UserModelConfig.userLoopN({
-        //   maxUsers: 1,
-        //   runNTimes: 1,
-        // }),
-        ...UserModelConfig.userLoopForTime({
-          maxUsers: 10,
-          holdTime: 5,
-        }),
+![Component Diagram](https://raw.githubusercontent.com/airicyu/rameter/main/images/Rameter%20Components.png)
+
+----
