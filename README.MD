@@ -2,7 +2,7 @@
 
 ## What is Rameter?
 
-**Rameter** is a NodeJS based load test tool inspired by [Jmeter](https://jmeter.apache.org/), [Locust](https://locust.io/), [K6](https://k6.io/).
+**Rameter** is a NodeJS based load test/performance test tool inspired by [Jmeter](https://jmeter.apache.org/), [Locust](https://locust.io/), [K6](https://k6.io/).
 
 The name "Rameter" do come from Ram(from AOC) + (J)meter.
 
@@ -20,7 +20,7 @@ The name "Rameter" do come from Ram(from AOC) + (J)meter.
 - Use it if you are using Locust, but you want to generate pretty HTML test report like Jmeter do.
 - Use it if you are using K6, but you want to use NodeJS native libraries, and you do not need the ultra performance of K6.
 
-## What is supported?
+## Features?
 
 - Define multiple user groups & dynamic scenario.
 - Support web dashboard UI during test running.
@@ -109,4 +109,18 @@ run();
 
 ![Component Diagram](https://raw.githubusercontent.com/airicyu/rameter/main/images/Rameter%20Components.png)
 
+## Web dashboard screencamp
+
+![Web dashboard screencamp](https://raw.githubusercontent.com/airicyu/rameter/main/images/web%20dashboard%20screencap.png)
+
 ----
+
+## Samples
+- [Hello World](https://github.com/airicyu/rameter/tree/main/samples/sample1-hello-world)
+- [Global Context](https://github.com/airicyu/rameter/tree/main/samples/sample2-global-context)
+- [User Context](https://github.com/airicyu/rameter/tree/main/samples/sample3-user-context)
+- [Writing interactive scenario logic](https://github.com/airicyu/rameter/tree/main/samples/sample4-interactive-scenario)
+- [Multiple User Groups & Scenarios](https://github.com/airicyu/rameter/tree/main/samples/sample5-multiple-user-groups-and-scenarios)
+- [Generate Jmeter Report](https://github.com/airicyu/rameter/tree/main/samples/sample6-generate-jmeter-report)
+- [Distributed Mode](https://github.com/airicyu/rameter/tree/main/samples/sample7-distributed-mode)
+- [Node Context](https://github.com/airicyu/rameter/tree/main/samples/sample8-node-context)

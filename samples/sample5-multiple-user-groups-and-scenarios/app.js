@@ -69,7 +69,6 @@ const run = async () => {
     try {
       // call API 1
       await HttpRequestSampler.request({
-        label: "foo",
         method: "GET",
         url: `${globalContext.serverBaseUrl}/foo`,
       });
@@ -96,7 +95,7 @@ const run = async () => {
         maxUsers: 20,
         steps: 10,
         rampUpTime: 15,
-        holdTime: 15,
+        holdTime: 30,
       }),
       userGroups: ["members"],
       scenarios: [["hello scenario", "foo scenario"]],
@@ -110,8 +109,9 @@ const run = async () => {
       userModel: UserModelConfig.stepUserForTime({
         maxUsers: 50,
         steps: 10,
-        rampUpTime: 5,
-        holdTime: 25,
+        delayTime: 10,
+        rampUpTime: 10,
+        holdTime: 30,
       }),
       userGroups: ["anonymous users"],
       scenarios: ["foo scenario"], // define to run these two scenarios
