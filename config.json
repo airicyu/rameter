@@ -1,0 +1,23 @@
+{
+    "master": {
+        "host": "127.0.0.1",
+        "port": 3001
+    },
+    "numWorkerNodes": 1,
+    "workerNode": {
+        "id": "node1"
+    },
+    "fileResultStore.bak": {
+        "outFile": "./result.csv",
+        "batchRecordThershold": 200,
+        "batchTimeThershold": 5000
+    },
+    "sampleForwarder.bak": {
+        "batchRecordThershold": 50,
+        "batchTimeThershold": 1000
+    },
+    "dashboard": {
+        "origin": "http://localhost:3000",
+        "port": 3000
+    }
+}

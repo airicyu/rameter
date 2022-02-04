@@ -1,0 +1,21 @@
+{
+  "name": "sample7-distributed-mode-worker-node",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "start": "node app.js",
+    "pm2.start": "pm2 start app.js",
+    "pm2.stop": "pm2 stop app.js",
+    "pm2.delete": "pm2 delete app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "pm2": "^5.1.2"
+  }
+}

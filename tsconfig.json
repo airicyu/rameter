@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "target": "ES2021",
+    "module":"ESNext",
+    "lib": ["ES2021"],
+    "strict": true,
+    "sourceMap": true,
+    "moduleResolution": "node",
+    // "declaration": true,
+    // "declarationDir": "dist/types",
+    "outDir": "dist",
+    "typeRoots": [
+      "./node_modules/@types", "./src/types"
+    ],
+    "types": ["node", "jest"]
+  },
+  "include": [
+    "./src/**/*"
+  ],
+  "exclude": ["node_modules"],
+  "extends": "@tsconfig/node16/tsconfig.json"
+}
