@@ -1,5 +1,7 @@
 # Rameter
 
+[![npm version](https://img.shields.io/npm/v/rameter.svg)](https://www.npmjs.com/package/rameter)
+
 ## What is Rameter?
 
 **Rameter** is a NodeJS based load test/performance test tool inspired by [Jmeter](https://jmeter.apache.org/), [Locust](https://locust.io/), [K6](https://k6.io/).
