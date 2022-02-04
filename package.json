@@ -1,6 +1,6 @@
 {
   "name": "rameter",
-  "version": "0.9.0",
+  "version": "0.9.1",
   "description": "",
   "type": "module",
   "main": "dist/main.js",
@@ -12,7 +12,14 @@
     "test": "jest --coverage",
     "test:watch": "jest --watch"
   },
-  "keywords": [],
+  "keywords": [
+    "load test",
+    "performance test",
+    "stress test",
+    "jmeter",
+    "test",
+    "testing"
+  ],
   "author": "",
   "license": "MIT",
   "dependencies": {
