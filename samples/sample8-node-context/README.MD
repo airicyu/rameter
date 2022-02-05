@@ -19,7 +19,7 @@ npm start
 
 install command
 ```
-cd samples/sample7-distributed-mode/master
+cd samples/sample8-node-context/master
 npm i
 cd ../workerNodee
 npm i
@@ -28,14 +28,14 @@ npm i
 ## Run Master
 
 ```
-cd samples/sample7-distributed-mode/master
+cd samples/sample8-node-context/master
 npm start
 ```
 
 ## Run Worker Node
 
 ```
-cd samples/sample7-distributed-mode/master
+cd samples/sample8-node-context/master
 npm start
 ```
 (alternatively you can run worker node with pm2 if you know how it works)
