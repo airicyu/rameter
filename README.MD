@@ -24,7 +24,7 @@ The name "Rameter" do come from Ram(from AOC) + (J)meter.
 - Use it if you are using Locust, but you want to generate pretty HTML test report like Jmeter do.
 - Use it if you are using K6, but you want to use NodeJS native libraries, and you do not need the ultra performance of K6.
 
-## Features?
+## Features
 
 - Write NodeJS code to define multiple user groups & dynamic scenarios.
 - Calling HTTP request sampler with Axios wrapper.
