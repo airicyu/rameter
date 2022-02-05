@@ -1,9 +1,13 @@
-import { ResultStore } from "./store/ResultStore.js";
+import type { ResultStore } from "./store/ResultStore.js";
 import { FileResultStore } from "./store/FileResultStore.js";
-import { ResultAnalyzer } from "./analyzer/ResultAnalyzer.js";
+import type { ResultAnalyzer } from "./analyzer/ResultAnalyzer.js";
 import { DefaultResultAnalyzer } from "./analyzer/DefaultResultAnalyzer.js";
 import EventEmitter from "events";
+import type { SampleRecord, Summary } from "../sharedTypes.js";
 
+/**
+ * Manage to store result, and perform result analysis.
+ */
 export class ResultManager {
   _config: Config;
   _resultStore?: ResultStore;

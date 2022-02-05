@@ -1,3 +1,8 @@
+import type { SampleRecord } from "../sharedTypes";
+
+/**
+ * Factory method to create SampleRecord
+ */
 export class SampleRecordFactory {
   static from({
     label,
@@ -30,6 +35,9 @@ export class SampleRecordFactory {
   }
 }
 
+/**
+ * Use for output file CSV
+ */
 export const defaultSampleHeaders = [
   "label",
   "startTime",

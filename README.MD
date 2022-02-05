@@ -4,7 +4,7 @@
 
 ## What is Rameter?
 
-**Rameter** is a NodeJS based load test/performance test tool inspired by [Jmeter](https://jmeter.apache.org/), [Locust](https://locust.io/), [K6](https://k6.io/).
+**Rameter** is a NodeJS based HTTP endpoint/API load test/performance test tool inspired by [Jmeter](https://jmeter.apache.org/), [Locust](https://locust.io/), [K6](https://k6.io/).
 
 The name "Rameter" do come from Ram(from AOC) + (J)meter.
 
@@ -24,14 +24,27 @@ The name "Rameter" do come from Ram(from AOC) + (J)meter.
 
 ## Features?
 
-- Define multiple user groups & dynamic scenario.
-- Support web dashboard UI during test running.
-- Support distributed mode.
+- Define multiple user groups & dynamic scenarios.
+- Calling HTTP request sampler with Axios wrapper.
+- Realtime web dashboard UI during test running.
+- Distributed mode.
 - Support Jmeter format CSV output, hence you can use Jmeter to generate HTML report.
 
 ----
 
-## install
+# Table of Contents
+1. [Install](#install)
+2. [Hello World](#hello-world)
+3. [Component Diagram](#component-diagram)
+4. [Realtime Dashboard Demo Screen](#realtime-dashboard-demo-screen)
+5. [User Models](#user-models)
+6. [Calling HTTP request](#calling-http-request)
+7. [Samples](#samples)
+8. API (To be update)
+
+----
+
+## Install
 ```
 npm i rameter
 ```
@@ -111,9 +124,181 @@ run();
 
 ![Component Diagram](https://raw.githubusercontent.com/airicyu/rameter/main/images/Rameter%20Components.png)
 
-## Realtime Dashboard
+- **Master**: Serve as controller. It fire commands to worker nodes to run the test. It collect result statistics.
+
+- **Worker Node**: The actual component to run the test. There can be N worker nodes to scale out test client side capacity.
+
+- **Web Dashboard**: Realtime web dashboard to view test statistics.
+
+### Variable Contexts
+
+- **Global Context**: Context variable to share in whole test scope.
+
+- **User Context**: Context variable to share within user scope.
+
+- **Node Context**: Each worker node can load local resources (e.g: large file) and share within the same node scope.
+
+## Realtime Dashboard Demo Screen
 
 ![Realtime dashboard](https://raw.githubusercontent.com/airicyu/rameter/main/images/web%20dashboard%20screencap.png)
+
+It dynamically shows:
+- Average response time per API over time
+- Throughput per API over time
+- API successful rate per API over time
+- User Group number of users over time
+
+----
+
+## User Models
+
+### stepUserForTime
+
+1. Ramp up M users.
+2. Each User would loop the scenario infinitely.
+3. After all users are spawned, the test would end after holding for N seconds.
+
+```javascript
+await rameter.runUntilFinished([
+  {
+    userModel: UserModelConfig.stepUserForTime({
+      maxUsers: 20,
+      rampUpTime: 10,
+      steps: 10,
+      holdTime: 60,
+      delayTime: 0
+    }),
+    userGroups: ["members"],
+    scenarios: ["hello scenario"],
+  },
+]);
+```
+#### Options
+
+| Option     | Description                                            | Mandatory? | Default Value |
+|------------|--------------------------------------------------------|------------|---------------|
+| maxUsers   | The maximum number of users you want to spawn.         | Yes        | -             |
+| steps      | The users would be spawn with this number of steps.    | Yes        | -             |
+| rampUpTime | The number of seconds to ramp up all users.            | Yes        | -             |
+| holdTime   | The number of seconds to hold after all users spawned. | Yes        | -             |
+| delayTime  | The number of seconds to wait before the user ramp up. | No         | 0             |
+
+### stepUserLoopN
+
+1. Ramp up M users.
+2. Each User would loop the scenario for N times.
+3. After all users finished the loops, the test would be ended.
+
+```javascript
+await rameter.runUntilFinished([
+  {
+    userModel: UserModelConfig.stepUserLoopN({
+      maxUsers: 20,
+      steps: 10,
+      rampUpTime: 10,
+      runNTimes: 100,
+      delayTime: 0
+    }),
+    userGroups: ["members"],
+    scenarios: ["hello scenario"],
+  },
+]);
+``` 
+
+#### Options
+
+| Option     | Description                                            | Mandatory? | Default Value |
+|------------|--------------------------------------------------------|------------|---------------|
+| maxUsers   | The maximum number of users you want to spawn.         | Yes        | -             |
+| steps      | The users would be spawn with this number of steps.    | Yes        | -             |
+| rampUpTime | The number of seconds to ramp up all users.            | Yes        | -             |
+| runNTimes  | Each user would run the scenario for N times.          | No         | 1             |
+| delayTime  | The number of seconds to wait before the user ramp up. | No         | 0             |
+
+### userLoopForTime
+
+1. Spawn M users.
+2. Each User would loop the scenario infinitely.
+3. After all users finished the loops, the test would be ended.
+
+```javascript
+await rameter.runUntilFinished([
+  {
+    userModel: UserModelConfig.userLoopForTime({
+      maxUsers: 20,
+      holdTime: 60,
+      delayTime: 0
+    }),
+    userGroups: ["members"],
+    scenarios: ["hello scenario"],
+  },
+]);
+```
+#### Options
+
+| Option     | Description                                            | Mandatory? | Default Value |
+|------------|--------------------------------------------------------|------------|---------------|
+| maxUsers   | The maximum number of users you want to spawn.         | Yes        | -             |
+| holdTime   | The number of seconds to hold after all users spawned. | Yes        | -             |
+| delayTime  | The number of seconds to wait before the user ramp up. | No         | 0             |
+
+### userLoopN
+
+1. Spawn M users.
+2. Each User would loop the scenario for N times.
+3. After all users finished the loops, the test would be ended.
+
+```javascript
+await rameter.runUntilFinished([
+  {
+    userModel: UserModelConfig.userLoopN({
+      maxUsers: 20,
+      holdTime: 60,
+      delayTime: 0
+    }),
+    userGroups: ["members"],
+    scenarios: ["hello scenario"],
+  },
+]);
+```
+#### Options
+
+| Option     | Description                                            | Mandatory? | Default Value |
+|------------|--------------------------------------------------------|------------|---------------|
+| maxUsers   | The maximum number of users you want to spawn.         | Yes        | -             |
+| runNTimes  | Each user would run the scenario for N times.          | No         | 1             |
+| delayTime  | The number of seconds to wait before the user ramp up. | No         | 0             |
+
+----
+
+## Calling HTTP request
+
+**TLDR**: The `HttpRequestSampler.request` method is a light wrapper for Axios request client.
+
+```javascript
+const response = await HttpRequestSampler.request({
+  method: "GET",
+  url: `http://localhost:8080/hello`,
+});
+```
+
+or 
+
+```javascript
+const response = await HttpRequestSampler.request({
+  label: "hello API",
+  method: "GET",
+  url: `http://localhost:3000/hello`,
+});
+```
+
+What the `HttpRequestSampler.request` actually is:
+
+1) Having a optional `label` option to group HTTP APIs. Otherwise we would use {HTTP method + URL path} as the label.
+2) Default to config that all HTTP status code interpret as not error.
+3) All remaining options are passed to Axios to call the HTTP request.
+4) Collect the time taken and success state statistics.
+5) Return back the response object for your own usage.
 
 ----
 
@@ -126,3 +311,9 @@ run();
 - [Generate Jmeter Report](https://github.com/airicyu/rameter/tree/main/samples/sample6-generate-jmeter-report)
 - [Distributed Mode](https://github.com/airicyu/rameter/tree/main/samples/sample7-distributed-mode)
 - [Node Context](https://github.com/airicyu/rameter/tree/main/samples/sample8-node-context)
+
+----
+
+## API
+
+To be update

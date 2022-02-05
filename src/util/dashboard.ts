@@ -1,6 +1,11 @@
 import handler from "serve-handler";
 import http from "http";
 
+/**
+ * up lifting the dashboard static webpage.
+ *
+ * @param port
+ */
 export const upDashboard = (port: number) => {
   const server = http.createServer((request, response) => {
     return handler(request, response, {

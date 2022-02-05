@@ -1,6 +1,9 @@
 import axios from "axios";
 import type { AxiosRequestConfig } from "axios";
 
+/**
+ * Wrapping the actual HTTP request client (Axios)
+ */
 export class HttpRequestClient {
   static _instance = axios.create({
     validateStatus: (status) => status < 300,

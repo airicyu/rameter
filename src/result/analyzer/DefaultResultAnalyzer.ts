@@ -1,6 +1,10 @@
 import { EventEmitter } from "events";
-import { ResultAnalyzer, Config as BaseConfig } from "./ResultAnalyzer.js";
+import type { SummaryRecord, SampleRecord, Summary } from "../../sharedTypes.js";
+import type { ResultAnalyzer, Config as BaseConfig } from "./ResultAnalyzer.js";
 
+/**
+ * Default implementation for Result analyzer
+ */
 export class DefaultResultAnalyzer implements ResultAnalyzer {
   _config: Config;
 
@@ -155,19 +159,7 @@ export class DefaultResultAnalyzer implements ResultAnalyzer {
 
   async analyze(): Promise<Summary> {
     //TODO real cal percentile instead of estimate value
-    for (const [label, distRecord] of Object.entries(this.distributeRecords)) {
-      const distBlankets = Object.values(distRecord).sort((a, b) => a.min - b.min);
-      const totalRecords = distBlankets.map((_) => _.count).reduce((prev, curr) => prev + curr);
-
-      this._summary[label].percentile = {
-        p25: this.calDistBlanketsPercentile(distBlankets, totalRecords, 25),
-        p50: this.calDistBlanketsPercentile(distBlankets, totalRecords, 50),
-        p75: this.calDistBlanketsPercentile(distBlankets, totalRecords, 75),
-        p90: this.calDistBlanketsPercentile(distBlankets, totalRecords, 90),
-        p95: this.calDistBlanketsPercentile(distBlankets, totalRecords, 95),
-      };
-    }
-    return this._summary;
+    return (await this.analyzeIntermediateResult()).summary;
   }
 
   calDistBlanketsPercentile(blankets: { min: number; max: number; count: number }[], totalRecords: number, percentile: number) {

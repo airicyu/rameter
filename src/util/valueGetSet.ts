@@ -1,3 +1,10 @@
+/**
+ * Util for wrapping object property getter/setter
+ *
+ * @param parent
+ * @param property
+ * @returns
+ */
 export const valueGetSet = <T>(parent: any, property: string): ValueGetSet<T> => {
   return [
     (): T | undefined => {

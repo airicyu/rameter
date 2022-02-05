@@ -1,3 +1,8 @@
+/**
+ * Util for defer trigger something.
+ *
+ * It is used for implementation defer flush mechanisms in other classes.
+ */
 export class DeferTrigger {
   _delayTime?: number;
   _lastTriggerTime = 0;

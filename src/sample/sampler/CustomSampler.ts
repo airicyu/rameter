@@ -2,7 +2,13 @@ import { Timer } from "../../util/timer.js";
 import { SampleRecordFactory } from "../SampleRecordFactory.js";
 import { testMetaAsyncStorage } from "../../workerNode/WorkerNode.js";
 import { getWorkerNode } from "../../util/singleton.js";
+import type { SampleRecord } from "../../sharedTypes.js";
 
+/**
+ * Generic sampler.
+ *
+ * It is used for take sample for sth other than HTTP request.
+ */
 export class CustomSampler {
   _config: Config;
   constructor(config: Config = {}) {

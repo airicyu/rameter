@@ -1,6 +1,8 @@
 import { WorkerNode, Config as WorkerNodeConfig } from "./workerNode/WorkerNode.js";
 import { Config as MasterConfig, Master } from "./master/Master.js";
 import { transformJmeterOut } from "./util/transformJmeterOut.js";
+import type { Scenario } from "./scenario/Scenario.js";
+import type { InitUserContextFunction, RunTestOptions } from "./sharedTypes.js";
 
 export class Rameter {
   master?: Master;

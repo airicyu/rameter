@@ -9,23 +9,9 @@ import http from "http";
 import https from "https";
 import timer from "@szmarczak/http-timer";
 
-// http transport for timings
-const httpTransport = {
-  request: function httpWithTimer(...args: any[]) {
-    const request = http.request.apply(null, args as any);
-    timer(request);
-    return request;
-  },
-};
-// https transport for timings
-const httpsTransport = {
-  request: function httpWithTimer(...args: any[]) {
-    const request = https.request.apply(null, args as any);
-    timer(request);
-    return request;
-  },
-};
-
+/**
+ * Call HTTP request, and record the statistic.
+ */
 export class HttpRequestSampler {
   _config: Config;
 
@@ -125,7 +111,22 @@ export class HttpRequestSampler {
   }
 }
 
-HttpRequestSampler;
+// http transport for timings
+const httpTransport = {
+  request: function httpWithTimer(...args: any[]) {
+    const request = http.request.apply(null, args as any);
+    timer(request);
+    return request;
+  },
+};
+// https transport for timings
+const httpsTransport = {
+  request: function httpWithTimer(...args: any[]) {
+    const request = https.request.apply(null, args as any);
+    timer(request);
+    return request;
+  },
+};
 
 export type Config = {
   defaultRequestOptions?: Partial<RequestOptions>;

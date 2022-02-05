@@ -3,8 +3,14 @@ import { MasterIO } from "./MasterIO.js";
 import { ResultManager } from "../result/ResultManager.js";
 import { sleep } from "../util/sleep.js";
 import { openUrl } from "../util/openUrl.js";
-import { upDashboard } from "./../dashboard.js";
+import { upDashboard } from "../util/dashboard.js";
+import type { RunTestOptions, SampleRecord } from "../sharedTypes.js";
 
+/**
+ * Master Controller.
+ *
+ * Serve as controller. It fire commands to worker nodes to run the test. It collect result statistics.
+ */
 export class Master {
   _config;
   _globalContext: any;

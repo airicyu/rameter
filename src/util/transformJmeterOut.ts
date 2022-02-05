@@ -2,6 +2,13 @@ import fs from "fs";
 import * as csv from "csv";
 import { stringify } from "csv-stringify";
 
+/**
+ * Transform Rameter output format to Jmeter CSV output format.
+ *
+ * @param inFile
+ * @param outFile
+ * @returns
+ */
 export const transformJmeterOut = async (inFile: string, outFile: string) => {
   const rs = fs.createReadStream(inFile);
 

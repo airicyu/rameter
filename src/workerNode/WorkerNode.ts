@@ -1,15 +1,19 @@
 import { AsyncLocalStorage } from "async_hooks";
-import type { SampleForwarder } from "../sample/forwarder/SampleForwarder.js";
-import { DefaultSampleForwarder, Config as DefaultSampleForwarderConfig } from "../sample/forwarder/DefaultSampleForwarder.js";
 import { EventEmitter } from "events";
 import * as ioClient from "socket.io-client";
-// import { Stepper, ErrorControl } from "../scenario/Stepper.js";
 import { sleep } from "../util/sleep.js";
 import { registerWorkerNode } from "../util/singleton.js";
+import type { SampleForwarder } from "../sample/forwarder/SampleForwarder.js";
+import { DefaultSampleForwarder, Config as DefaultSampleForwarderConfig } from "../sample/forwarder/DefaultSampleForwarder.js";
 import { TestRunner } from "./TestRunner.js";
 import { valueGetSet } from "../util/valueGetSet.js";
-import { uuidv4 } from "../uuid.js";
+import { uuidv4 } from "../util/uuid.js";
+import { Scenario } from "../scenario/Scenario.js";
+import type { InitUserContextFunction, RunTestOptions, SampleRecord, TestMeta } from "../sharedTypes.js";
 
+/**
+ * The actual component to run the test. There can be N worker nodes to scale out test client side capacity.
+ */
 export class WorkerNode {
   _config;
   _id: string;

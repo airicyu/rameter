@@ -1,10 +1,17 @@
 import fs, { appendFile } from "fs";
 import { stringify } from "csv-stringify";
 import { defaultSampleHeaders } from "../../sample/SampleRecordFactory.js";
-import { ResultStore, Config as BaseConfig } from "./ResultStore.js";
+import type { ResultStore, Config as BaseConfig } from "./ResultStore.js";
 import { EventEmitter } from "events";
 import { DeferTrigger } from "../../util/DeferTrigger.js";
+import type { SampleRecord } from "../../sharedTypes.js";
 
+/**
+ * Default implementation of ResultStore.
+ *
+ * Storing result in result file.
+ * It has some kind of internal buffering to flush write when "every N samples buffered or T seconds passed".
+ */
 export class FileResultStore implements ResultStore {
   _config: Config;
   _bufferRecords: SampleRecord[] = [];

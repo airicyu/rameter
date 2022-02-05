@@ -2,7 +2,12 @@ import { ValueGetSet } from "../util/valueGetSet.js";
 import { testMetaAsyncStorage } from "./WorkerNode.js";
 import EventEmitter from "events";
 import { StepUserModel } from "../userModel/StepUserModel.js";
+import { Scenario } from "../scenario/Scenario.js";
+import type { InitUserContextFunction, RunTestOptions, TestMeta } from "../sharedTypes.js";
 
+/**
+ * building the actual running processes for users X scenario, and run them til the end.
+ */
 export class TestRunner {
   static async runTest({
     globalContext,

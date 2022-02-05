@@ -1,14 +1,10 @@
-declare type RunTestOptions = {
+export type RunTestOptions = {
   userModel: any;
   userGroups: string[];
   scenarios: Array<string | string[]>;
 };
 
-declare interface Scenario {
-  ({ globalContext: any, nodeContext: any, userContext: any, userId: string }): Promise<void>;
-}
-
-declare type TestMeta = {
+export type TestMeta = {
   userGroup: string;
   scenario: string | string[];
   userId?: string;
@@ -16,11 +12,9 @@ declare type TestMeta = {
   allUsers?: number;
 };
 
-declare interface InitUserContextFunction {
-  ({ globalContext: any, nodeContext: any, userId: string }): Promise<any>;
-}
+export type InitUserContextFunction = (parameters: { globalContext: any; nodeContext: any; userId: string }) => Promise<any>;
 
-declare type SampleRecord = {
+export type SampleRecord = {
   label: string;
   startTime: number;
   success: boolean;
@@ -31,7 +25,7 @@ declare type SampleRecord = {
   [key: string]: any;
 };
 
-declare type HttpSampleRecord = SampleRecord & {
+export type HttpSampleRecord = SampleRecord & {
   wait: number | null;
   connect: number | null;
   upload: number | null;
@@ -39,7 +33,7 @@ declare type HttpSampleRecord = SampleRecord & {
   download: number | null;
 };
 
-declare type SummaryRecord = {
+export type SummaryRecord = {
   label: string;
   startTime: number;
   count: number;
@@ -57,6 +51,6 @@ declare type SummaryRecord = {
   };
 };
 
-declare type Summary = {
+export type Summary = {
   [key: string]: SummaryRecord;
 };

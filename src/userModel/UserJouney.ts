@@ -1,4 +1,4 @@
-import { StepUserModel, State } from "./StepUserModel.js";
+import { StepUserModel, State, DEFAULT_CONFIG_VALE } from "./StepUserModel.js";
 
 /**
  * The common interface for different ways to run user journey:
@@ -29,7 +29,7 @@ export class UserJourneyRunN implements UserJourney {
   ): () => Promise<void> {
     return async () => {
       const { userId, userContext } = await spawnUser();
-      for (let k = 0; k < (this.stepUserModel._config.runNTimes ?? 1); k++) {
+      for (let k = 0; k < (this.stepUserModel._config.runNTimes ?? DEFAULT_CONFIG_VALE.runNTimes); k++) {
         if (this.stepUserModel._state !== State.RUNNING) {
           break;
         }

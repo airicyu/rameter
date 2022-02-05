@@ -3,7 +3,14 @@ import type { SampleForwarder, Config as BaseConfig } from "./SampleForwarder.js
 import * as ioClient from "socket.io-client";
 import { EventEmitter } from "events";
 import { DeferTrigger } from "../../util/DeferTrigger.js";
+import type { SampleRecord } from "../../sharedTypes.js";
 
+/**
+ * Default implementation of SampleForwarder.
+ *
+ * It would send back sample result to Master via websocket.
+ * It has some kind of internal buffering to flush send when "every N samples buffered or T seconds passed".
+ */
 export class DefaultSampleForwarder implements SampleForwarder {
   _config: Config;
   _socket?: ioClient.Socket;

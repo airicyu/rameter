@@ -1,3 +1,6 @@
+/**
+ * A wrapper function to run code. And it would stop begin to run if there are already error happened.
+ */
 export class Stepper {
   _errorControl: ErrorControl;
 

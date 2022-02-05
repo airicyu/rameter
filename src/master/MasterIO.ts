@@ -1,8 +1,12 @@
 import http from "http";
 import * as io from "socket.io";
+import type { RunTestOptions, SampleRecord } from "../sharedTypes.js";
 import { sleep } from "../util/sleep.js";
 import { Master } from "./Master.js";
 
+/**
+ * Responsible to handle external IO for Master
+ */
 export class MasterIO {
   _config: Config;
   _httpServer?: http.Server;

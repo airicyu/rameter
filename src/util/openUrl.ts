@@ -5,6 +5,12 @@ const WINDOWS_PLATFORM = "win32";
 const MAC_PLATFORM = "darwin";
 const osPlatform = platform();
 
+/**
+ * Util function to open dashboard in browser.
+ *
+ * @param url
+ * @returns
+ */
 export const openUrl = async (url: string) => {
   let command = "";
 

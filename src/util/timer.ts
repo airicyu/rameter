@@ -1,3 +1,6 @@
+/**
+ * Timer class to measure time duration
+ */
 export class Timer {
   _status: STATUS = STATUS.INIT;
   _startTick: [number, number] | null = null;

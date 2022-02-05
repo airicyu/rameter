@@ -2,7 +2,7 @@ import { sleep } from "../util/sleep.js";
 import { UserJourney, UserJourneyRunForever, UserJourneyRunN, UserJourneyRunOnce } from "./UserJouney.js";
 
 /**
- * Control the step user model
+ * User model control (step model)
  */
 export class StepUserModel {
   _config: Config;
@@ -108,7 +108,7 @@ export type Config = {
   endMode?: EndMode;
 };
 
-const DEFAULT_CONFIG_VALE = {
+export const DEFAULT_CONFIG_VALE = {
   steps: 1,
   delayTime: 0,
   rampUpTime: 0,
