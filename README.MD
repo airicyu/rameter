@@ -1,5 +1,7 @@
 # Rameter
 
+> **With Rameter, you can write load test with simple NodeJS scripts!**
+
 [![npm version](https://img.shields.io/npm/v/rameter.svg)](https://www.npmjs.com/package/rameter)
 
 ## What is Rameter?
