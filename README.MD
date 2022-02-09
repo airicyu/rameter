@@ -77,8 +77,7 @@ npm i rameter
 
 ## Hello World
 
-<details>
-<summary>helloWorld.js</summary>
+helloWorld.js
 
 ```javascript
 import { Rameter, HttpRequestSampler, sleep, UserModelConfig } from "rameter";
@@ -148,7 +147,6 @@ const run = async () => {
 };
 run();
 ```
-</details>
 
 Steps to run:
 1) Install rameter.
@@ -393,8 +391,8 @@ Import:
 import { Rameter } from "rameter";
 ```
 
-<detail>
-<summary>Methods<summary>
+<details>
+<summary>Methods</summary>
 
 For run the standalone setup (Both Master & Worker Node is in local)
 
@@ -544,8 +542,6 @@ Noted:
 - log: it control whether to console out summary logs for every some seconds during test running. Default true.
 - openDashboard: it control whether auto open a web dashboard to view real-time statistics. Default true.
 
-</detail>
-
 ----
 
 Shut down Master & Workder Nodes
@@ -567,6 +563,8 @@ transformJmeterOut(inFile: string, outFile: string): Promise<void>;
 ```
 
 <p align="right">(<a href="#rameter">back to top</a>)</p>
+
+</details>
 
 ----
 
