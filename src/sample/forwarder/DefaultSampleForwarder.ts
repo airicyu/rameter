@@ -15,11 +15,6 @@ export class DefaultSampleForwarder implements SampleForwarder {
   _config: Config;
   _socket?: ioClient.Socket;
 
-  defaultConfig = {
-    batchRecordThershold: 100,
-    batchTimeThershold: 5000,
-  };
-
   _event = new EventEmitter();
 
   _bufferRecords: SampleRecord[] = [];
@@ -112,11 +107,11 @@ export class DefaultSampleForwarder implements SampleForwarder {
   }
 
   get batchRecordThershold() {
-    return this._config.batchRecordThershold ?? this.defaultConfig.batchRecordThershold;
+    return this._config.batchRecordThershold ?? DEFAULT_CONFIG.batchRecordThershold;
   }
 
   get batchTimeThershold() {
-    return this._config.batchTimeThershold ?? this.defaultConfig.batchTimeThershold;
+    return this._config.batchTimeThershold ?? DEFAULT_CONFIG.batchTimeThershold;
   }
 
   down() {}
@@ -126,6 +121,11 @@ export type Config = {
   batchRecordThershold?: number;
   batchTimeThershold?: number;
 } & BaseConfig;
+
+export const DEFAULT_CONFIG = {
+  batchRecordThershold: 100,
+  batchTimeThershold: 5000,
+};
 
 const enum State {
   IDLE = "IDLE",

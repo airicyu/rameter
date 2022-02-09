@@ -151,12 +151,7 @@ export class Master {
     });
   }
 
-  async waitUntilFinished({
-    log,
-    intermediateSummary,
-    tickSummary,
-    openDashboard,
-  }: { log?: boolean; intermediateSummary?: boolean; tickSummary?: boolean; openDashboard?: boolean } = {}) {
+  async waitUntilFinished({ log, openDashboard }: { log?: boolean; openDashboard?: boolean } = {}) {
     let waiting = true;
 
     const tasks = [];
@@ -190,7 +185,7 @@ export class Master {
         })()
       );
     }
-    if (intermediateSummary !== false) {
+    if (log !== false || openDashboard !== false) {
       tasks.push(
         (async () => {
           while (waiting) {
@@ -203,7 +198,7 @@ export class Master {
         })()
       );
     }
-    if (tickSummary !== false) {
+    if (openDashboard !== false) {
       tasks.push(
         (async () => {
           while (waiting) {
@@ -217,16 +212,16 @@ export class Master {
     }
 
     if (openDashboard !== false) {
-      upDashboard(this._config.dashboard?.port ?? defaultConfig.dashboard.port);
+      upDashboard(this._config.dashboard?.origin ?? DEFAULT_CONFIG.dashboard.origin, this._config.dashboard?.port ?? DEFAULT_CONFIG.dashboard.port);
       await sleep(1000);
-      openUrl(this._config.dashboard?.origin ?? defaultConfig.dashboard.origin);
+      openUrl(this._config.dashboard?.origin ?? DEFAULT_CONFIG.dashboard.origin);
     }
 
     await Promise.race(tasks);
   }
 }
 
-const defaultConfig = {
+const DEFAULT_CONFIG = {
   master: {
     host: "localhost",
     port: "3001",

@@ -4,7 +4,7 @@ import * as ioClient from "socket.io-client";
 import { sleep } from "../util/sleep.js";
 import { registerWorkerNode } from "../util/singleton.js";
 import type { SampleForwarder } from "../sample/forwarder/SampleForwarder.js";
-import { DefaultSampleForwarder, Config as DefaultSampleForwarderConfig } from "../sample/forwarder/DefaultSampleForwarder.js";
+import { DefaultSampleForwarder, DEFAULT_CONFIG as DefaultSampleForwarderDefaultConfig } from "../sample/forwarder/DefaultSampleForwarder.js";
 import { TestRunner } from "./TestRunner.js";
 import { valueGetSet } from "../util/valueGetSet.js";
 import { uuidv4 } from "../util/uuid.js";
@@ -53,7 +53,7 @@ export class WorkerNode {
 
   async up() {
     if (!this._sampleForwarder) {
-      this._sampleForwarder = new DefaultSampleForwarder(this._config.sampleForwarder as unknown as DefaultSampleForwarderConfig, this);
+      this._sampleForwarder = new DefaultSampleForwarder(this._config.sampleForwarder ?? DEFAULT_CONFIG.sampleForwarder, this);
     }
 
     await this._ioChannel.up();
@@ -172,7 +172,9 @@ export class WorkerNodeIOChannel {
   async up() {
     return await new Promise((resolve) => {
       if (!this._socket) {
-        this._socket = ioClient.io(`ws://${this._config.master.host}:${this._config.master.port}/workerNode`);
+        this._socket = ioClient.io(
+          `ws://${this._config.master.host ?? DEFAULT_CONFIG.master.host}:${this._config.master.port ?? DEFAULT_CONFIG.master.port}/workerNode`
+        );
 
         /**
          * Master message driven
@@ -271,10 +273,18 @@ export class WorkerNodeIOChannel {
 
 export const testMetaAsyncStorage = new AsyncLocalStorage<TestMeta>();
 
+const DEFAULT_CONFIG = {
+  master: {
+    host: "localhost",
+    port: "3001",
+  },
+  sampleForwarder: DefaultSampleForwarderDefaultConfig,
+};
+
 export type Config = {
   master: {
-    host: string;
-    port: number;
+    host?: string;
+    port?: number;
   };
   workerNode?: {
     id?: string;

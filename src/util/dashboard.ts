@@ -6,7 +6,7 @@ import http from "http";
  *
  * @param port
  */
-export const upDashboard = (port: number) => {
+export const upDashboard = (origin: string, port: number) => {
   const server = http.createServer((request, response) => {
     return handler(request, response, {
       public: "./node_modules/rameter/dashboard",
@@ -14,6 +14,6 @@ export const upDashboard = (port: number) => {
   });
 
   server.listen(port, () => {
-    console.log(`Running Dashboard at http://127.0.0.1:${port}`);
+    console.log(`Running Dashboard at ${origin}`);
   });
 };

@@ -18,7 +18,7 @@ export class ResultManager {
   constructor(config: Config, masterEvent: EventEmitter) {
     this._config = config;
     this._masterEvent = masterEvent;
-    this._resultStore = new FileResultStore(config.fileResultStore);
+    this._resultStore = new FileResultStore(config.fileResultStore ?? {});
     this._resultAnalyzer = new DefaultResultAnalyzer({}, masterEvent);
   }
 
@@ -71,8 +71,8 @@ export class ResultManager {
 
 export type Config = {
   fileResultStore?: {
-    batchRecordThershold?: 50;
-    batchTimeThershold?: 1000;
+    batchRecordThershold?: number;
+    batchTimeThershold?: number;
     outFile?: string;
   };
 };

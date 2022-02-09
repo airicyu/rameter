@@ -91,15 +91,15 @@ export class FileResultStore implements ResultStore {
   }
 
   get batchRecordThershold() {
-    return this._config.batchRecordThershold ?? defaultConfig.batchRecordThershold;
+    return this._config.batchRecordThershold ?? DEFAULT_CONFIG.batchRecordThershold;
   }
 
   get batchTimeThershold() {
-    return this._config.batchTimeThershold ?? defaultConfig.batchTimeThershold;
+    return this._config.batchTimeThershold ?? DEFAULT_CONFIG.batchTimeThershold;
   }
 
   get outFile() {
-    return this._config.outFile ?? defaultConfig.outFile;
+    return this._config.outFile ?? DEFAULT_CONFIG.outFile;
   }
 
   async flushBufferToFile(): Promise<boolean> {
@@ -139,7 +139,7 @@ const enum State {
   WRITING = "WRITING",
 }
 
-const defaultConfig = {
+const DEFAULT_CONFIG = {
   batchRecordThershold: 100,
   batchTimeThershold: 5000,
   outFile: "./result.csv",

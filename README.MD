@@ -4,6 +4,38 @@
 
 [![npm version](https://img.shields.io/npm/v/rameter.svg)](https://www.npmjs.com/package/rameter)
 
+# Table of Contents
+
+- [Rameter](#rameter)
+- [Table of Contents](#table-of-contents)
+- [About the Project](#about-the-project)
+  - [What is Rameter?](#what-is-rameter)
+  - [Why do I make Rameter?](#why-do-i-make-rameter)
+  - [Why Rameter?](#why-rameter)
+  - [Features](#features)
+- [Getting Started](#getting-started)
+  - [Install](#install)
+  - [Hello World](#hello-world)
+- [Concepts](#concepts)
+  - [Component Diagram](#component-diagram)
+  - [Shared variable context](#shared-variable-context)
+  - [Realtime Dashboard Demo Screen](#realtime-dashboard-demo-screen)
+- [Docs](#docs)
+  - [User Models](#user-models)
+    - [stepUserForTime](#stepuserfortime)
+    - [stepUserLoopN](#stepuserloopn)
+    - [userLoopForTime](#userloopfortime)
+    - [userLoopN](#userloopn)
+  - [Calling HTTP request](#calling-http-request)
+  - [API](#api)
+    - [Rameter class](#rameter-class)
+  - [Full configuration](#full-configuration)
+  - [Samples](#samples)
+
+----
+
+# About the Project
+
 ## What is Rameter?
 
 **Rameter** is a NodeJS based HTTP endpoint/API load test/performance test tool inspired by [Jmeter](https://jmeter.apache.org/), [Locust](https://locust.io/), [K6](https://k6.io/).
@@ -34,17 +66,7 @@ The name "Rameter" do come from Ram(from AOC) + (J)meter.
 
 ----
 
-# Table of Contents
-1. [Install](#install)
-2. [Hello World](#hello-world)
-3. [Component Diagram](#component-diagram)
-4. [Realtime Dashboard Demo Screen](#realtime-dashboard-demo-screen)
-5. [User Models](#user-models)
-6. [Calling HTTP request](#calling-http-request)
-7. [Samples](#samples)
-8. API (To be update)
-
-----
+# Getting Started
 
 ## Install
 ```
@@ -52,6 +74,10 @@ npm i rameter
 ```
 
 ## Hello World
+
+<details>
+<summary>helloWorld.js</summary>
+
 ```javascript
 import { Rameter, HttpRequestSampler, sleep, UserModelConfig } from "rameter";
 
@@ -86,7 +112,7 @@ const run = async () => {
       // call an HTTP endpoint
       await HttpRequestSampler.request({
         method: "GET",
-        url: `http://localhost:8080/hello`,
+        url: `http://localhost:8080/hello`, // replace this with ur endpoint
       });
     } catch (e) {
       console.error(e);
@@ -120,7 +146,19 @@ const run = async () => {
 };
 run();
 ```
+</details>
+
+Steps to run:
+1) Install rameter.
+2) Add the hello world script.
+3) Replace the "hello scenario" part to call your endpoint.
+4) Run the script.
+5) You will then see the console is logging that it is calling the endpoint.
+6) It will also auto open the web dashboard to show real-time graphs.
+
 ----
+
+# Concepts
 
 ## Component Diagram
 
@@ -132,9 +170,9 @@ run();
 
 - **Web Dashboard**: Realtime web dashboard to view test statistics.
 
-### Variable Contexts
+## Shared variable context
 
-- **Global Context**: Context variable to share in whole test scope.
+- **Global Context**: Context variable to globally shared in the whole test scope.
 
 - **User Context**: Context variable to share within user scope.
 
@@ -152,6 +190,8 @@ It dynamically shows:
 
 ----
 
+# Docs
+
 ## User Models
 
 ### stepUserForTime
@@ -159,6 +199,9 @@ It dynamically shows:
 1. Ramp up M users.
 2. Each User would loop the scenario infinitely.
 3. After all users are spawned, the test would end after holding for N seconds.
+
+<details>
+<summary>Details</summary>
 
 ```javascript
 await rameter.runUntilFinished([
@@ -175,7 +218,8 @@ await rameter.runUntilFinished([
   },
 ]);
 ```
-#### Options
+
+Options
 
 | Option     | Description                                            | Mandatory? | Default Value |
 |------------|--------------------------------------------------------|------------|---------------|
@@ -185,11 +229,18 @@ await rameter.runUntilFinished([
 | holdTime   | The number of seconds to hold after all users spawned. | Yes        | -             |
 | delayTime  | The number of seconds to wait before the user ramp up. | No         | 0             |
 
+</details>
+
+----
+
 ### stepUserLoopN
 
 1. Ramp up M users.
 2. Each User would loop the scenario for N times.
 3. After all users finished the loops, the test would be ended.
+
+<details>
+<summary>Details</summary>
 
 ```javascript
 await rameter.runUntilFinished([
@@ -207,7 +258,7 @@ await rameter.runUntilFinished([
 ]);
 ``` 
 
-#### Options
+Options
 
 | Option     | Description                                            | Mandatory? | Default Value |
 |------------|--------------------------------------------------------|------------|---------------|
@@ -217,11 +268,18 @@ await rameter.runUntilFinished([
 | runNTimes  | Each user would run the scenario for N times.          | No         | 1             |
 | delayTime  | The number of seconds to wait before the user ramp up. | No         | 0             |
 
+</details>
+
+----
+
 ### userLoopForTime
 
 1. Spawn M users.
 2. Each User would loop the scenario infinitely.
-3. After all users finished the loops, the test would be ended.
+3. The test would end after holding for N seconds.
+
+<details>
+<summary>Details</summary>
 
 ```javascript
 await rameter.runUntilFinished([
@@ -236,7 +294,8 @@ await rameter.runUntilFinished([
   },
 ]);
 ```
-#### Options
+
+Options
 
 | Option     | Description                                            | Mandatory? | Default Value |
 |------------|--------------------------------------------------------|------------|---------------|
@@ -244,11 +303,18 @@ await rameter.runUntilFinished([
 | holdTime   | The number of seconds to hold after all users spawned. | Yes        | -             |
 | delayTime  | The number of seconds to wait before the user ramp up. | No         | 0             |
 
+</details>
+
+----
+
 ### userLoopN
 
 1. Spawn M users.
 2. Each User would loop the scenario for N times.
 3. After all users finished the loops, the test would be ended.
+
+<details>
+<summary>Details</summary>
 
 ```javascript
 await rameter.runUntilFinished([
@@ -263,13 +329,15 @@ await rameter.runUntilFinished([
   },
 ]);
 ```
-#### Options
+Options
 
 | Option     | Description                                            | Mandatory? | Default Value |
 |------------|--------------------------------------------------------|------------|---------------|
 | maxUsers   | The maximum number of users you want to spawn.         | Yes        | -             |
 | runNTimes  | Each user would run the scenario for N times.          | No         | 1             |
 | delayTime  | The number of seconds to wait before the user ramp up. | No         | 0             |
+
+</details>
 
 ----
 
@@ -304,6 +372,233 @@ What the `HttpRequestSampler.request` actually is:
 
 ----
 
+## API
+
+### Rameter class
+
+This is the major class to use to control the test.
+
+Import: 
+```javascript
+import { Rameter } from "rameter";
+```
+
+<detail>
+<summary>Methods<summary>
+
+For run the standalone setup (Both Master & Worker Node is in local)
+
+```javascript
+/**
+ * Run the setup for standalone mode.
+ * It would create a Master & a local Workder Node
+ *
+ * @param config
+ * @returns
+ */
+runStandalone(config: MasterConfig & WorkerNodeConfig): Promise<{
+    master: Master;
+    workerNode: WorkerNode;
+}>;
+```
+
+For run the distributed mode's Master and Worker Node
+
+```javascript
+/**
+ * Run the setup for distribute mode - Run the Master
+ *
+ * @param config
+ * @returns
+ */
+runMaster(config: MasterConfig): Promise<Master>;
+/**
+ * Run the setup for distribute mode - Run the Worker Node
+ *
+ * @param config
+ * @returns
+ */
+runWorkerNode(config: WorkerNodeConfig): Promise<WorkerNode>;
+```
+
+----
+
+Let the Master broadcast Global Context to Worker Nodes.
+
+```javascript
+/**
+ * Export the globalContext. It would broadcase to all connecting Workder Node
+ *
+ * @param globalContext
+ */
+exportGlobalContext(globalContext: any): Promise<void | undefined>;
+```
+
+(it must be run after called `runStandalone` or `runMaster`)
+
+----
+
+Define a handler to load Node Context.
+This is for the case that you want every Workder Node doing some operation to load Worker Node local shared variables.
+
+```javascript
+/**
+ * Set the handler for loading Node Context.
+ *
+ * @param loadNodeContextHandler
+ */
+loadNodeContext(loadNodeContextHandler: (globalContext: any) => Promise<any>): Promise<void | undefined>;
+```
+
+Notes:
+- You should define this `loadNodeContext` in your Workder Node, coz it is run on Worker Node side.
+- The node context handler is optional. You may no need to call this if you don't use Node Context.
+
+----
+
+Define user group
+
+```javascript
+/**
+ * Define User Group.
+ *
+ * @param name
+ * @param initUserContext
+ */
+defineUserGroup(name: string, initUserContext: InitUserContextFunction): Promise<void | undefined>;
+
+declare type InitUserContextFunction = (parameters: {
+    globalContext: any;
+    nodeContext: any;
+    userId: string;
+}) => Promise<any>;
+```
+
+Define user scenario
+
+```javascript
+/**
+ * Define User Scenario.
+ *
+ * @param name
+ * @param scenario
+ */
+defineUserScenario(name: string, scenario: Scenario): Promise<void | undefined>;
+
+declare type Scenario = (parameters: {
+    globalContext: any;
+    nodeContext: any;
+    userContext: any;
+    userId: string;
+}) => Promise<void>;
+```
+
+The above two define function 
+(it must be run after called `runStandalone` or `runMaster`)
+
+----
+
+Let the Workder Node to declare ready for start testing
+
+```javascript
+/**
+ * Mark for Work Node ready for start testing.
+ *
+ * @returns
+ */
+readyTest(): Promise<void | undefined>;
+```
+Notes:
+- This must be called after you defined all users, scenarios.
+- This must be called in your Workder Node.
+- Without calling this, the Master would not able to start testing becoz it is waiting worker nodes to notify ready.
+
+----
+
+Start running the test, and wait until test finished
+
+```javascript
+/**
+ * Start running the test, and wait until test finished
+ *
+ * @param options
+ * @param param1
+ */
+runUntilFinished(options: RunTestOptions[], { log, intermediateSummary, tickSummary, openDashboard, }?: {
+    log?: boolean;
+    openDashboard?: boolean;
+}): Promise<void>;
+```
+
+Noted:
+- log: it control whether to console out summary logs for every some seconds during test running. Default true.
+- openDashboard: it control whether auto open a web dashboard to view real-time statistics. Default true.
+
+</detail>
+
+----
+
+Shut down Master & Workder Nodes
+```javascript
+down(): Promise<void>;
+```
+
+Shut down Worker Nodes
+```javascript
+downNodes(): Promise<void>;
+```
+
+----
+
+Util for Transform output file to Jmeter CSV format out file
+
+```javascript
+transformJmeterOut(inFile: string, outFile: string): Promise<void>;
+```
+
+----
+
+## Full configuration
+
+Sample:
+```json
+{
+    "master": {
+        "host": "localhost",
+        "port": 3001
+    },
+    "numWorkerNodes": 1,
+    "fileResultStore": {
+        "outFile": "./result.csv",
+        "batchRecordThershold": 100,
+        "batchTimeThershold": 5000
+    },
+    "sampleForwarder": {
+        "batchRecordThershold": 100,
+        "batchTimeThershold": 5000
+    },
+    "dashboard": {
+        "origin": "http://localhost:3000",
+        "port": 3000
+    }
+}
+```
+
+| Option     | Description                                            | Mandatory? | Default Value |
+|------------|--------------------------------------------------------|------------|---------------|
+| master.host   | The host of Master. This is the host which workder nodes can resolve to connect        | No        | localhost             |
+| master.port      | The port of Master.    | No        | 3001             |
+| numWorkerNodes | The number of Worker Nodes.            | No but recommend explicitly set        | 1             |
+| fileResultStore.outFile  | The csv file to write test samples. | No         | "./result.csv"             |
+| fileResultStore.batchRecordThershold  | The store would flush if buffered N records | No         | 100             |
+| fileResultStore.batchTimeThershold  | The store would flush if passed N milleseconds | No         | 5000             |
+| sampleForwarder.batchRecordThershold  | The forwarder would flush if buffered N records | No         | 100             |
+| sampleForwarder.batchTimeThershold  | The forwarder would flush if passed N milleseconds | No         | 5000             |
+| dashboard.origin  | The dashboard website origin | No         | "http://localhost:3000"             |
+| dashboard.port  | The dashboard port | No         | 3000             |
+
+----
+
 ## Samples
 - [Hello World](https://github.com/airicyu/rameter/tree/main/samples/sample1-hello-world)
 - [Global Context](https://github.com/airicyu/rameter/tree/main/samples/sample2-global-context)
@@ -314,8 +609,3 @@ What the `HttpRequestSampler.request` actually is:
 - [Distributed Mode](https://github.com/airicyu/rameter/tree/main/samples/sample7-distributed-mode)
 - [Node Context](https://github.com/airicyu/rameter/tree/main/samples/sample8-node-context)
 
-----
-
-## API
-
-To be update

@@ -28,7 +28,7 @@ export class MasterIO {
   async up() {
     this._httpServer = http.createServer();
     this._io = new io.Server(this._httpServer, {
-      cors: { origin: this._config.dashboard?.origin ?? defaultConfig.dashboard.origin },
+      cors: { origin: this._config.dashboard?.origin ?? DEFAULT_CONFIG.dashboard.origin },
     });
 
     this._io.of("/dashboard").on("connection", (socket: io.Socket) => {
@@ -245,7 +245,7 @@ export class MasterIO {
     });
 
     return new Promise((resolve) => {
-      this._httpServer?.listen(this._config.master?.port ?? defaultConfig.master.port, () => {
+      this._httpServer?.listen(this._config.master?.port ?? DEFAULT_CONFIG.master.port, () => {
         resolve(true);
       });
     });
@@ -278,7 +278,7 @@ const enum RUN_TEST_STATE {
   FINISHED = "FINISHED",
 }
 
-const defaultConfig = {
+const DEFAULT_CONFIG = {
   master: {
     host: "localhost",
     port: "3001",
