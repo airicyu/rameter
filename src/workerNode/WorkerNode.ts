@@ -173,7 +173,7 @@ export class WorkerNodeIOChannel {
     return await new Promise((resolve) => {
       if (!this._socket) {
         this._socket = ioClient.io(
-          `ws://${this._config.master.host ?? DEFAULT_CONFIG.master.host}:${this._config.master.port ?? DEFAULT_CONFIG.master.port}/workerNode`
+          `ws://${this._config.master?.host ?? DEFAULT_CONFIG.master.host}:${this._config.master?.port ?? DEFAULT_CONFIG.master.port}/workerNode`
         );
 
         /**
@@ -282,7 +282,7 @@ const DEFAULT_CONFIG = {
 };
 
 export type Config = {
-  master: {
+  master?: {
     host?: string;
     port?: number;
   };

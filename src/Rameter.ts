@@ -52,7 +52,7 @@ export class Rameter {
    * @param config
    * @returns
    */
-  async runMaster(config: MasterConfig): Promise<Master> {
+  async runMaster(config: MasterConfig = {}): Promise<Master> {
     const master = new Master(config);
     await master.up();
 
@@ -66,7 +66,7 @@ export class Rameter {
    * @param config
    * @returns
    */
-  async runWorkerNode(config: WorkerNodeConfig) {
+  async runWorkerNode(config: WorkerNodeConfig = {}) {
     const workerNode = new WorkerNode(config);
     await workerNode.up();
 
