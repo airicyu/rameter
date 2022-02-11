@@ -252,12 +252,9 @@ export class MasterIO {
   }
 
   async down() {
-    this._httpServer?.close((err) => {
-      err && console.error(err);
-      this._io?.close((err) => {
-        err && console.error(err);
-        console.log("master server closed");
-      });
+    this._io?.close((err) => {
+      err && console.error("master server close error", err);
+      console.log("master server closed");
     });
   }
 }
