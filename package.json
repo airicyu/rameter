@@ -1,6 +1,6 @@
 {
   "name": "rameter",
-  "version": "0.12.0",
+  "version": "0.12.1",
   "description": "With Rameter, you can write load test with simple NodeJS scripts!",
   "author": "airicyu",
   "type": "module",

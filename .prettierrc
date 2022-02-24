@@ -16,6 +16,5 @@
     "trailingComma": "es5",
     "useTabs": false,
     "vueIndentScriptAndStyle": false,
-    "filepath": "c:\\workspace\\gwang\\src\\workerNode\\TestRunner.ts",
     "parser": "typescript"
   }

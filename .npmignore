@@ -4,5 +4,4 @@ samples
 tests
 coverage
 jest.config.js
-dist
 images
