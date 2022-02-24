@@ -41,6 +41,5 @@ jspm_packages
 
 node_modules
 coverage
-/dist
 
 samples/**/result.csv
