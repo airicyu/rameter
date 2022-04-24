@@ -42,7 +42,7 @@ rameter.defineUserScenario("verify code scenario", async ({ globalContext, nodeC
         const codeResponse = await HttpRequestSampler.request({
         label: "generateCode",
         method: "GET",
-        url: `${serverBaseUrl}/generateCode?user=${userContext.user.name}&token=${userContext.user.token}`,
+        url: `${globalContext.serverBaseUrl}/generateCode?user=${userContext.user.name}&token=${userContext.user.token}`,
         });
 
         /**
@@ -54,7 +54,7 @@ rameter.defineUserScenario("verify code scenario", async ({ globalContext, nodeC
         await HttpRequestSampler.request({
         label: "verifyCode",
         method: "GET",
-        url: `${serverBaseUrl}/verifyCode?user=${userContext.user.name}&code=${code}`,
+        url: `${globalContext.serverBaseUrl}/verifyCode?user=${userContext.user.name}&code=${code}`,
         validateResponse: (response) => {
             return response.data.success;
         },

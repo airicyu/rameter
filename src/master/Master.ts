@@ -130,7 +130,6 @@ export class Master {
   async down() {
     this._eventEmitter.emit("master:command:down");
     await sleep(100);
-    process.exit(0);
   }
 
   async downNodes() {

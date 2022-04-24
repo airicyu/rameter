@@ -9,6 +9,9 @@
     "start": "node app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "dependencies": {
+    "rameter": "^0.12.2"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC"
