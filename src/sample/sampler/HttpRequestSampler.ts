@@ -19,8 +19,10 @@ export class HttpRequestSampler {
     this._config = config;
   }
 
-  static request(options: RequestOptions): Promise<AxiosResponse | null> {
-    return new HttpRequestSampler().request(options);
+  static default = new HttpRequestSampler({});
+
+  static async request(options: RequestOptions): Promise<AxiosResponse | null> {
+    return HttpRequestSampler.default.request(options);
   }
 
   async request(options: RequestOptions): Promise<AxiosResponse | null> {

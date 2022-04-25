@@ -15,11 +15,17 @@ export class CustomSampler {
     this._config = config;
   }
 
-  async run(code: () => Promise<any>) {
+  static default = new CustomSampler();
+
+  static async run(code: () => Promise<{ data: any; sampleRecord: Partial<SampleRecord> }>) {
+    return CustomSampler.default.run(code);
+  }
+
+  async run(code: () => Promise<{ data: any; sampleRecord: Partial<SampleRecord> }>) {
     const startTime = Date.now();
     const timer = new Timer().start();
 
-    const { data, sampleRecord }: { data: any; sampleRecord: Partial<SampleRecord> } = await code();
+    const { data, sampleRecord } = await code();
 
     const durationMs = timer.stop().duration;
 

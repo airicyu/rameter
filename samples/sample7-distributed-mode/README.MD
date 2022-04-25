@@ -82,6 +82,7 @@ Sample code (Master):
    * shutdown
    */
   await rameter.down();
+  process.exit();
 ```
 
 

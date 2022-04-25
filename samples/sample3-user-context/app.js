@@ -78,3 +78,4 @@ await rameter.runUntilFinished([
  * shutdown
  */
 await rameter.down();
+process.exit();

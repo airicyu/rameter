@@ -2,7 +2,7 @@
 
 This sample is to demonstrate the usage of global context.
 
-Global Context is the context viables that you want to share along the whole test scope. If you have some simple properties values that would be use, e.g. a global system token value, you may set it in global context so that it can be use later on.
+Global Context is the read only context viables that you want to share along the whole test scope. If you have some simple properties values that would be use, e.g. a global system token value, you may set it in global context before the test run so that it can be use later on.
 
 In the test scenario, you can get the global context given from the function parameter. You should use this variable instead of reading some arbitrary global scope variables because they are not available in distributed mode.
 
@@ -65,4 +65,5 @@ rameter.defineUserScenario("hello scenario", async ({ globalContext, nodeContext
     }
 });
 
+......
 ```

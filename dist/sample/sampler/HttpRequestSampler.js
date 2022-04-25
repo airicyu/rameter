@@ -13,8 +13,8 @@ export class HttpRequestSampler {
     constructor(config = {}) {
         this._config = config;
     }
-    static request(options) {
-        return new HttpRequestSampler().request(options);
+    static async request(options) {
+        return HttpRequestSampler.default.request(options);
     }
     async request(options) {
         const { validateResponse } = options;
@@ -89,6 +89,7 @@ export class HttpRequestSampler {
         return response;
     }
 }
+HttpRequestSampler.default = new HttpRequestSampler({});
 // http transport for timings
 const httpTransport = {
     request: function httpWithTimer(...args) {

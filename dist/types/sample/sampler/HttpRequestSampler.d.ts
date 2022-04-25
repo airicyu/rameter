@@ -5,6 +5,7 @@ import type { AxiosRequestConfig, AxiosResponse } from "axios";
 export declare class HttpRequestSampler {
     _config: Config;
     constructor(config?: Config);
+    static default: HttpRequestSampler;
     static request(options: RequestOptions): Promise<AxiosResponse | null>;
     request(options: RequestOptions): Promise<AxiosResponse | null>;
 }

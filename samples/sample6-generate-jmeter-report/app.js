@@ -71,3 +71,4 @@ await rameter.down();
  * write jmeter format output
  */
 await rameter.transformJmeterOut("./result.csv", "./result_jmeter.csv");
+process.exit();

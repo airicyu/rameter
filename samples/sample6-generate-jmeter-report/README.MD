@@ -55,5 +55,6 @@ await rameter.down();
  * Read Rameter output file "./result.csv", and write jmeter format output "./result_jmeter.csv"
  */
 await rameter.transformJmeterOut("./result.csv", "./result_jmeter.csv");
+process.exit();
 
 ```

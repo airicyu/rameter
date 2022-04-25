@@ -11,6 +11,9 @@ export class CustomSampler {
     constructor(config = {}) {
         this._config = config;
     }
+    static async run(code) {
+        return CustomSampler.default.run(code);
+    }
     async run(code) {
         const startTime = Date.now();
         const timer = new Timer().start();
@@ -31,4 +34,5 @@ export class CustomSampler {
         return { data };
     }
 }
+CustomSampler.default = new CustomSampler();
 //# sourceMappingURL=CustomSampler.js.map

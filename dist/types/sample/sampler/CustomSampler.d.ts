@@ -1,3 +1,4 @@
+import type { SampleRecord } from "../../sharedTypes.js";
 /**
  * Generic sampler.
  *
@@ -6,7 +7,17 @@
 export declare class CustomSampler {
     _config: Config;
     constructor(config?: Config);
-    run(code: () => Promise<any>): Promise<{
+    static default: CustomSampler;
+    static run(code: () => Promise<{
+        data: any;
+        sampleRecord: Partial<SampleRecord>;
+    }>): Promise<{
+        data: any;
+    }>;
+    run(code: () => Promise<{
+        data: any;
+        sampleRecord: Partial<SampleRecord>;
+    }>): Promise<{
         data: any;
     }>;
 }

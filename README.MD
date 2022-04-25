@@ -27,6 +27,7 @@
     - [userLoopForTime](#userloopfortime)
     - [userLoopN](#userloopn)
   - [Calling HTTP request](#calling-http-request)
+  - [Custom Sampler](#custom-sampler)
   - [API](#api)
     - [Rameter class](#rameter-class)
   - [Full configuration](#full-configuration)
@@ -133,6 +134,7 @@ await rameter.runUntilFinished([
  * shutdown
  */
 await rameter.down();
+process.exit();
 ```
 
 Steps to run:
@@ -365,6 +367,36 @@ What the `HttpRequestSampler.request` actually is:
 5) Return back the response object for your own usage.
 
 <p align="right">(<a href="#rameter">back to top</a>)</p>
+
+----
+
+## Custom Sampler
+
+What if you want to verify operation performance which is not HTTP request call?
+For examples, loading DB operation? Schedule job processing time?
+
+Actually Rameter provide you the `CustomSampler` which you can run any code fragment as an operation. Rameter would measure the time to complete it just like it do for HTTP requests.
+
+Inside your scenario, you can write like this.
+```javascript
+// use CustomSampler to measure some operation
+await CustomSampler.run(async () => {
+  await sleep(Math.round(Math.random() * 2000));
+  return {
+    data: { foo: 1 },
+    sampleRecord: {
+      label: "Mocking some operation",
+    },
+  };
+});
+```
+
+Notice the code function passed to the `CustomSampler.run`.
+It is expected to be an async function, which return `{ data: XXX, sampleRecord: YYY }`:
+- `XXX` is any data result that you may want to return to scenario.
+- `YYY` is test metadata. It is optional and usually you don't need it but it is recommended that you at least define `label` attribute which can group sampler result.
+
+You can see an full example in [Custom Sampler](https://github.com/airicyu/rameter/tree/main/samples/sample9-custom-sampler).
 
 ----
 
@@ -608,5 +640,6 @@ Sample:
 - [Generate Jmeter Report](https://github.com/airicyu/rameter/tree/main/samples/sample6-generate-jmeter-report)
 - [Distributed Mode](https://github.com/airicyu/rameter/tree/main/samples/sample7-distributed-mode)
 - [Node Context](https://github.com/airicyu/rameter/tree/main/samples/sample8-node-context)
+- [Custom Sampler](https://github.com/airicyu/rameter/tree/main/samples/sample9-custom-sampler)
 
 <p align="right">(<a href="#rameter">back to top</a>)</p>
