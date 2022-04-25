@@ -138,10 +138,11 @@ await rameter.down();
 Steps to run:
 1) Install rameter.
 2) Add the hello world script.
-3) Replace the "hello scenario" part to call your endpoint.
-4) Run the script.
-5) You will then see the console is logging that it is calling the endpoint.
-6) It will also auto open the web dashboard to show real-time graphs.
+3) Just a reminder. The hello world script is using ES module. So you may need to have your package.json defined with `... "type" : "module", ...`. Or otherwise you need to change the module import syntax.
+4) Replace the "hello scenario" part to call your endpoint.
+5) Run the script.
+6) You will then see the console is logging that it is calling the endpoint.
+7) It will also auto open the web dashboard to show real-time graphs.
 
 <p align="right">(<a href="#rameter">back to top</a>)</p>
 
