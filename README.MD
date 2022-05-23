@@ -315,7 +315,7 @@ await rameter.runUntilFinished([
   {
     userModel: UserModelConfig.userLoopN({
       maxUsers: 20,
-      holdTime: 60,
+      runNTimes: 60,
       delayTime: 0
     }),
     userGroups: ["members"],
@@ -375,7 +375,7 @@ What the `HttpRequestSampler.request` actually is:
 What if you want to verify operation performance which is not HTTP request call?
 For examples, loading DB operation? Schedule job processing time?
 
-Actually Rameter provide you the `CustomSampler` which you can run any code fragment as an operation. Rameter would measure the time to complete it just like it do for HTTP requests.
+Actually Rameter provide you the `CustomSampler` which you can run any code fragment as an operation. Rameter would measure the time to complete it just like it does for HTTP requests.
 
 Inside your scenario, you can write like this.
 ```javascript
